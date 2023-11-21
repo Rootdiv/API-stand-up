@@ -1,0 +1,16 @@
+{
+  "name": "api-stand-up",
+  "version": "1.0.0",
+  "description": "api для сервиса регистрации на stand up",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "Vladimir <web-master@rootdiv.ru>",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
