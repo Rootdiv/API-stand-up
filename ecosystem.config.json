@@ -1,0 +1,14 @@
+{
+  "apps": [
+    {
+      "name": "API Stand Up",
+      "script": "index.js",
+      "watch": [
+        "index.js"
+      ],
+      "env": {
+        "HTTP": "https"
+      }
+    }
+  ]
+}
