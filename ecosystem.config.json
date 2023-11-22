@@ -4,7 +4,8 @@
       "name": "API Stand Up",
       "script": "index.js",
       "watch": [
-        "index.js"
+        "index.js",
+        "modules"
       ],
       "env": {
         "HTTP": "https"
