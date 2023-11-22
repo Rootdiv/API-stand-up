@@ -1,7 +1,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { sendData, sendError } from './send.js';
 import { CLIENTS } from '../index.js';
-import { readRequestBody } from './helpers.js';
+import { readRequestBody, validData } from './helpers.js';
 
 export const handleUpdateClient = async (req, res, ticket) => {
   try {
@@ -17,20 +17,7 @@ export const handleUpdateClient = async (req, res, ticket) => {
       return;
     }
 
-    if (!/^([a-zёа-я\s]+)$/i.test(updateDataClient.fullName)) {
-      sendError(res, 400, 'Имя и Фамилия не может содержать цифры');
-      return;
-    }
-
-    if (updateDataClient.phone.length !== 10) {
-      sendError(res, 400, 'Номер телефона должен быть 10 символов');
-      return;
-    }
-
-    if (updateDataClient.ticket.length !== 8) {
-      sendError(res, 400, 'Номер билета должен быть 8 символов');
-      return;
-    }
+    validData(res, updateDataClient);
 
     if (!updateDataClient.booking?.length || !updateDataClient.booking.every(item => item.comedian && item.time)) {
       sendError(res, 400, 'Неверно заполнены поля бронирования');
