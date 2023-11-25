@@ -8,8 +8,8 @@ import { handleClientsRequest } from './modules/handleClientsRequest.js';
 import { handleUpdateClient } from './modules/handleUpdateClient.js';
 
 const PORT = 2125;
-const COMEDIANS = './comedians.json';
-export const CLIENTS = './clients.json';
+const COMEDIANS = './database/comedians.json';
+export const CLIENTS = './database/clients.json';
 
 const startServer = async () => {
   if (!(await checkFileExist(COMEDIANS))) {

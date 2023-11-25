@@ -17,7 +17,7 @@ export const createFileIfNotExist = async path => {
     await access(path);
   } catch (error) {
     console.log(error);
-    await writeFile(`${path}`, '[]', 'utf-8');
+    await writeFile(path, '[]', 'utf-8');
     console.log(`Файл ${path} был создан!`);
     return true;
   }
