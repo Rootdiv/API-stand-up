@@ -1,4 +1,5 @@
-import { createServer } from 'node:http';
+const protocol = process.env.HTTP || 'http';
+const { createServer } = await import(`node:${protocol}`);
 import { readFile } from 'node:fs/promises';
 import { sendError } from './modules/send.js';
 import { checkFileExist, createFileIfNotExist } from './modules/checkFile.js';
@@ -6,6 +7,14 @@ import { handleComediansRequest } from './modules/handleComediansRequest.js';
 import { handleAddClient } from './modules/handleAddClient.js';
 import { handleClientsRequest } from './modules/handleClientsRequest.js';
 import { handleUpdateClient } from './modules/handleUpdateClient.js';
+
+const options = {};
+if (protocol === 'https') {
+  const domain = 'rootdiv.ru';
+  const certDir = '/etc/nginx/acme.sh';
+  options['key'] = await readFile(`${certDir}/${domain}/privkey.pem`);
+  options['cert'] = await readFile(`${certDir}/${domain}/fullchain.pem`);
+}
 
 const PORT = 2125;
 const COMEDIANS = './database/comedians.json';
@@ -18,7 +27,7 @@ const startServer = async () => {
 
   await createFileIfNotExist(CLIENTS);
 
-  createServer(async (req, res) => {
+  createServer(options, async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     const [resource, id] = req.url.split('/').filter(Boolean);
 
