@@ -13,7 +13,9 @@ export const handleAddClient = async (req, res) => {
       return;
     }
 
-    validData(res, newClient);
+    if (!validData(res, newClient)) {
+      return;
+    }
 
     if (!newClient.booking?.length || !newClient.booking.every(item => item.comedian && item.time)) {
       sendError(res, 400, 'Неверно заполнены поля бронирования');
