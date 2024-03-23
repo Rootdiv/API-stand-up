@@ -8,7 +8,7 @@
         "modules"
       ],
       "env": {
-        "HTTP": "https"
+        "PROD": true
       }
     }
   ]
